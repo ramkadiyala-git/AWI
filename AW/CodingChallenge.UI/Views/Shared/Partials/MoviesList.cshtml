@@ -1,0 +1,60 @@
+﻿@using CodingChallenge.UI.Models
+@using SortDirection = CodingChallenge.DataAccess.SortDirection
+@model MovieListViewModel
+
+<table class="table table-striped grid-table">
+    <thead>
+        <tr>
+            <th><a href="@GetSortLink("ID")">ID</a></th>
+            <th><a href="@GetSortLink("Title")">Title</a></th>
+            <th><a href="@GetSortLink("Year")">Year</a></th>
+            <th><a href="@GetSortLink("Rating")">Rating</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr class="grid-row">
+                <td>@movie.ID</td>
+                <td>@movie.Title</td>
+                <td>@movie.Year</td>
+                <td>@movie.Rating</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="grid-pager">
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.GridOptions.PageCount; i++)
+        {
+            if (i == Model.GridOptions.Page)
+            {
+                <li class="active"><span>@i</span></li>
+            }
+            else
+            {
+                <li><a href="@GetPageLink(i)">@i</a></li>
+            }
+        }
+    </ul>
+</div>
+
+@helper GetSortLink(string sortColumn)
+{
+    @Html.Raw(string.Format("/?{0}={1}&{2}={3}", 
+        GridOptions.SortColumnKey, 
+        sortColumn, 
+        GridOptions.SortDirectionKey,
+        Model.GridOptions.SortColumn == sortColumn && Model.GridOptions.SortDirection == SortDirection.Ascending ? GridOptions.SortDescendingValue : GridOptions.SortAscendingValue))
+}
+
+@helper GetPageLink(int page)
+{
+    @Html.Raw(string.Format("/?{0}={1}&{2}={3}&{4}={5}",
+        GridOptions.SortColumnKey, 
+        Model.GridOptions.SortColumn, 
+        GridOptions.SortDirectionKey,
+        Model.GridOptions.SortDirection == SortDirection.Ascending ? GridOptions.SortAscendingValue : GridOptions.SortDescendingValue,
+        GridOptions.PageKey,
+        page))
+}

@@ -1,0 +1,10 @@
+body {
+  padding: 20px; }
+
+table {
+  border: solid 1px #CCCCCC; }
+  table th, table td {
+    padding: 8px;
+    border: solid 1px #CCCCCC; }
+
+/*# sourceMappingURL=global.css.map */

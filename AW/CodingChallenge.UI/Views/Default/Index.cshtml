@@ -1,0 +1,23 @@
+﻿@model MovieListViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My Movie Library</title>
+        <script src="/Scripts/jquery-1.9.0.min.js"></script>
+        <script src="/Scripts/bootstrap.min.js"></script>
+        <link href="/Content/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="/Content/global.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <div>
+            <h1>My Movie Library</h1>
+            @Html.Partial("/Views/Shared/Partials/MoviesList.cshtml", Model)
+        </div>
+    </body>
+</html>
